@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import React from 'react';
+import { ErrorMessage } from '../types/ErrorMessage';
 
 type Props = {
-  error: string;
-  onDeleteMessage: (message: string) => void;
+  error: ErrorMessage;
+  onDeleteMessage: (message: ErrorMessage | '') => void;
 };
 
 export const ErrorNotification: React.FC<Props> = ({

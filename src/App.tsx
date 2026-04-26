@@ -9,11 +9,13 @@ import { ErrorNotification } from './components/ErrorNotification';
 import { Status } from './types/Status';
 import classNames from 'classnames';
 import { Footer } from './components/Footer';
+import { ErrorMessage } from './types/ErrorMessage';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage | ''>('');
   const [status, setStatus] = useState<Status>(Status.All);
 
   const focusedInput = useRef<HTMLInputElement | null>(null);
@@ -33,7 +35,7 @@ export const App: React.FC = () => {
     getTodos()
       .then(setTodos)
       .catch(() => {
-        setErrorMessage('Unable to load todos');
+        setErrorMessage(ErrorMessage.Load);
 
         if (timerId.current !== null) {
           clearTimeout(timerId.current);
