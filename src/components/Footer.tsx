@@ -24,11 +24,17 @@ export const Footer: React.FC<Props> = ({
       <nav className="filter" data-cy="Filter">
         {Object.values(Status).map(element => (
           <a
-            href={element === 'All' ? '#/' : `#/${element}`}
+            href={element === 'All' ? '#/' : `#/${element.toLowerCase()}`}
             className={classNames('filter__link', {
               selected: status === element,
             })}
-            data-cy="FilterLinkAll"
+            data-cy={
+              element === Status.All
+                ? 'FilterLinkAll'
+                : element === Status.Active
+                  ? 'FilterLinkActive'
+                  : 'FilterLinkCompleted'
+            }
             onClick={() => onChangeStatus(element)}
             key={element}
           >
